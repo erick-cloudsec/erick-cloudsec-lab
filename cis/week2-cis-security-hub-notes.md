@@ -7,3 +7,8 @@
 - IAM role for CloudTrail→CloudWatch Logs:
   - `arn:aws:iam::912590423014:role/service-role/CloudTrailRoleForCloudWatchLogs_erick-cloudsec-trail`
 - Purpose: Provide a log stream for CIS CloudWatch controls (CloudWatch.2 and CloudWatch.3) evaluated by AWS Security Hub.
+
+### SNS security alerts
+
+- SNS topic for security alerts: `arn:aws:sns:us-east-1:912590423014:lab-security-alerts`
+- Subscription: email → erick.k.bradley@gmail.com
