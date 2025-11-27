@@ -47,3 +47,8 @@ Use this at the end of each week, in a 15-minute block.
 
 - Review top Security Hub CIS findings and pick 1–2 controls to improve in the lab.  
 - Start exploring possible OWASP projects I could realistically contribute to.
+
+## Additional notes
+
+- The metrics and alarms steps made sense at a high-level, but I’m not 100% comfortable with the finer details yet.  
+- Learned that Security Hub may not have controls for some of the CloudWatch items I configured, which makes me wonder why they were removed in CIS v5.
