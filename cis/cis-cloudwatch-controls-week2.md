@@ -39,7 +39,7 @@
 
 - Log group: `aws-cloudtrail-logs-erick-cloudsec-lab`
 - Metric filter: `console_signin_no_mfa_metric`
-  - Pattern: {($.eventName="ConsoleLogin") && ($.additionalEventData.MFAUsed!="Yes") && ($.responseElements.ConsoleLogin="Success")}
+  - Pattern: `{($.eventName="ConsoleLogin") && ($.additionalEventData.MFAUsed!="Yes") && ($.responseElements.ConsoleLogin="Success")}`
   - Metric: CISBenchmark / ConsoleSigninNoMFA
 - Alarm: `Alarm-ConsoleSignin-NoMFA`
   - Condition: Sum >= 1 over 5 minutes (1 evaluation period)
