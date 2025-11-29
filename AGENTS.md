@@ -44,3 +44,5 @@ If no Makefile: `terraform init && terraform plan -var-file=config/dev.tfvars`, 
 - Prefer remote backends for Terraform state; least‑privilege IAM; enable encryption at rest/in transit.
 - Run secret scanners (`gitleaks`/`detect-secrets`) via pre‑commit.
 
+## Agent Interaction Guidelines
+- Always show the exact shell commands executed and briefly explain what each one does so the user can follow and learn.
