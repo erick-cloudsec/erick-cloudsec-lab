@@ -1,9 +1,23 @@
 # OWASP Contrib Targets
 
-Add OWASP contribution targets here (service names, repos, contacts). Use bullet lists and include owners where possible.
+## Active
 
-## Issue #1892 – CSRF TOC update (ON HOLD)
+### OWASP Nest – API Documentation Cleanup
+- Status: ACTIVE
+- Notes: ...
+- Working docs: `owasp/nest/`
 
-- Status: HELP_WANTED + ACK_OBTAINED, but comments say it’s blocked until a related merge lands.
-- Why I like it: focuses on structure/TOC and clarity, not deep new content.
-- Action for now: wait for maintainers to clear the “blocked” note, then comment offering to help.
+### (Future) Other Active Target
+- ...
+
+## On Hold
+
+### Issue #1892 – CSRF TOC update (ON HOLD)
+- Status: HELP_WANTED + ACK_OBTAINED, but blocked pending merge.
+- Why I like it: ...
+- Action: Wait for maintainers to clear the “blocked” note, then comment offering to help.
+
+## Ideas / Parking Lot
+
+### <Future idea>
+- ...
