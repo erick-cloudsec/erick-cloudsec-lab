@@ -1,3 +1,57 @@
+# Week 3 Retro (Dec 1–7, 2025)
+
+**Q1. What did I actually do this week?**
+
+- Continued the CSA “Top Threats” course:
+  - Finished the Cloud Risk & Mitigation section and passed the knowledge check (100%).
+  - Finished the Top Threats to Cloud Computing section and passed the quiz (80%).
+- For my OWASP Nest contrib project (documenting the Nest APIs):
+  - Installed and used Postman against my local OWASP Nest instance (`/api/v0/projects/`).
+  - Investigated how Nest data sync works (snapshots, GitHub user sync, GitHub PAT issues) and timeboxed that work instead of falling down the rabbit hole.
+  - Traced the full implementation of the projects endpoint:
+    - `backend/apps/api/rest/v0/project.py`
+    - `backend/apps/api/rest/__init__.py`
+    - `backend/apps/api/rest/auth/api_key.py`
+  - Drafted and updated `projects.md` for `GET /api/v0/projects/`, including:
+    - Query params and enum values (`level`, `ordering`, `page`, `page_size`).
+    - Auth details (`X-API-Key` header, local vs non-local behavior, rate limiting).
+    - Example curls (local + non-local).
+    - 200 and 422 response examples with explanations.
+
+**Q2. What moved me closer to Cloud/AppSec Architect interviews?**
+
+- Turned OWASP Nest from “mystery project” into something I can navigate: I went from OpenAPI → Django Ninja code → auth class → proper endpoint docs.
+- Produced a concrete, reviewable artifact (`projects.md`) as part of an ongoing effort to **document OWASP Nest’s APIs**, which is exactly the kind of open-source, AppSec-adjacent contribution that shows architect-level thinking.
+- Deepened my Top Threats foundation and connected it to real API design (input validation, error responses, auth, rate limiting).
+
+**Q3. What felt heavy or draining?**
+
+- The Nest data sync and GitHub PAT troubleshooting: it was easy to imagine burning hours there, and I had to consciously stop once it became clear it was a separate setup project.
+- Juggling the late nights at the day job plus study time; by midweek I didn’t have much energy left for AWS hands-on.
+
+**Q4. What felt light or energizing?**
+
+- Finally drafting `projects.md` and seeing how the prep (reading code, poking at OpenAPI, running local Nest) all paid off.
+- Realizing I can systematically reverse-engineer an endpoint and document it like an architect, not just “follow a tutorial.”
+- The Top Threats quizzes—having my prior PMP/risk background click into place in the cloud context felt good.
+
+**Q5. What did I learn or notice about myself?**
+
+- I can timebox technical rabbit holes (like the Nest sync/PAT issue) without feeling like I “failed”—I got the information I needed and moved on.
+- I still have a little guilt about leaning on AI for help, even though I’m using it as an assist on top of reading real code and docs. Rationally, this is how a senior engineer/architect would work.
+- Threat modeling, APTs, and TTPs grabbed my attention more than the generic risk material—good signal for where my motivation is.
+
+**Q6. How many hours did I invest this week (roughly)?**
+
+- Top Threats course + quizzes: ~2.5 hours  
+- OWASP Nest investigation + Postman + endpoint documentation: ~2–2.5 hours  
+- **Total:** ~4.5–5 hours (within my 4–6 hour target, even with a heavy workweek).
+
+**Q7. Top 1–2 priorities for next week (Week 4)**
+
+1. **OWASP Nest:** Get the `GET /api/v0/projects/` docs reviewed by a maintainer and, if they look good, use this as a template to document at least one more list endpoint.
+2. **AWS:** Add one small, concrete AWS security/detection task (e.g., a CloudWatch metric filter + alarm) to keep my hands in the cloud side.
+
 # Weekly Retro Template – Cloud/AppSec Lab
 
 Use this at the end of each week, in a 15-minute block.
