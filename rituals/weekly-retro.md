@@ -1,3 +1,35 @@
+Here’s a public-safe Week 4 retro you can drop straight into your retro file (newest at the top):
+
+# Week 4 Retro (Dec 8–14, 2025)
+
+**Q1. What did I actually do this week?**
+- Finished the CSA **Top Threats** course and saved the completion cert.
+- Refined the CIS CloudWatch.2 control in the AWS lab:
+  - Verified the `unauthorized_api_calls_metric` filter on CloudTrail `UnauthorizedOperation` / `AccessDenied` (excluding the noisy service roles).
+  - Updated `Alarm-Unauthorized-API-Calls` (metric `CISBenchmark/UnauthorizedAPICalls`, threshold ≥5 in 5 minutes, 1/1, SNS email).
+- Documented the control in `notes/aws-lab-log.md` with plain-language + specs + “what a human does when this fires.”
+- Captured screenshots: the alarm details and the CloudTrail → CloudWatch Logs delivery path.
+
+**Q2. What moved me closer to Cloud/AppSec Architect interviews?**
+- I can walk the unauthorized API calls control end-to-end and map it to CIS CloudWatch.2, Security Hub, and common threat scenarios.
+- Produced portfolio-ready evidence (lab log + screenshots) and a reusable note format for future controls.
+
+**Q3. What felt heavy or draining?**
+- The week was busy/fragmented, which limited deep Cloud/AppSec time.
+- Context switching between learning, implementation, and documentation took extra energy.
+
+**Q4. What surprised me or what did I learn?**
+- Small alarm refinements become high-value when tied to a standard and backed by a runbook-style response.
+- The plain-language + technical-detail note style works well; keep using it.
+
+**Q5. What will I change for next week?**
+- Plan for limited but focused blocks and pick one main artifact (e.g., OWASP Nest docs).
+- Keep applying the lab-log format to new controls.
+
+**Q6. Top 1–2 priorities for next week (Week 5)**
+1. **OWASP Nest docs:** tighten `projects.md` for `GET /api/v0/projects/` and use it as a template for another list endpoint.
+2. **Optional:** CSA Top Threats → AWS mapping for the unauthorized API calls control to make it interview-ready.
+
 # Week 3 Retro (Dec 1–7, 2025)
 
 **Q1. What did I actually do this week?**
