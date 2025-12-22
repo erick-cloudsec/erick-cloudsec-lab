@@ -1,5 +1,114 @@
 # AWS Lab Log
 
+## 2025-12-21 – AWS Config recording foundation (CIS Config.1)
+
+### What I set up (in plain language)
+
+In my **erick-cloudsec** lab AWS account, I remediated a **Critical** failing CIS/Security Hub posture control: **Config.1 – AWS Config should be enabled and use the service-linked role for resource recording**.
+
+I started from **Security Hub CSPM → CIS AWS Foundations Benchmark v5.0.0** and used the failing control as my “work item.” The key issue wasn’t just “Config is on” — it was that AWS Config must:
+- be enabled in the current Region,
+- use the **AWS Config service-linked role** (`AWSServiceRoleForConfig`), and
+- record the resource types required by the Security Hub controls enabled in that Region (including IAM global resource types like users/roles/policies/groups).  
+(That’s exactly what Config.1 checks.)  
+(Ref: Security Hub CSPM Config controls docs.)  [oai_citation:0‡AWS Documentation](https://docs.aws.amazon.com/securityhub/latest/userguide/config-controls.html?utm_source=chatgpt.com)
+
+After updating the AWS Config recorder settings, the **Config.1 check** now shows **PASSED** (and the finding workflow status is **RESOLVED**, which Security Hub sets automatically when a control finding becomes PASSED).  [oai_citation:1‡AWS Documentation](https://docs.aws.amazon.com/securityhub/latest/userguide/controls-overall-status.html?utm_source=chatgpt.com)
+
+Note: the top-level “Control status” banner can lag the latest finding update; the **Checks** row is the best proof of the current evaluation.  [oai_citation:2‡AWS Documentation](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-control-details.html?utm_source=chatgpt.com)
+
+---
+
+### Asset I’m protecting
+
+- **Governance and visibility** for the AWS account:
+  - A trustworthy configuration inventory
+  - Change history for resources
+  - The ability for posture controls (CIS / AWS FSBP) to evaluate resource configurations consistently
+
+AWS Config is a foundational service for audit/compliance and ongoing configuration monitoring.  [oai_citation:3‡Amazon Web Services, Inc.](https://aws.amazon.com/blogs/mt/aws-config-best-practices/?utm_source=chatgpt.com)
+
+---
+
+### Threat I care about here
+
+- **Blind spots**: if AWS Config isn’t recording the right resource types, security posture tooling can’t reliably detect drift or misconfiguration.
+- **Weak auditability**: limited or missing configuration history makes incident response and compliance evidence harder.
+- **Control dependency failure**: many Security Hub controls rely on AWS Config recording to evaluate resources.
+
+---
+
+### Detection / control details (the actual config)
+
+#### Detection source (posture finding)
+
+- Service: **AWS Security Hub CSPM**
+- Standards enabled:
+  - **AWS Foundational Security Best Practices v1.0.0**
+  - **CIS AWS Foundations Benchmark v5.0.0**
+- Control: **Config.1**
+- Region / account: `us-east-1 / 912590423014`
+
+Security Hub generates/updates control findings on a schedule (typically every 12–24 hours) and lists active findings for the past 24 hours on the control’s **Checks** tab.  [oai_citation:4‡AWS Documentation](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-control-details.html?utm_source=chatgpt.com)
+
+#### Remediation (AWS Config)
+
+In **AWS Config → Settings** (us-east-1), I ensured the account has an active recorder that satisfies Config.1:
+
+- **Customer managed recorder**: enabled (Recording is on)
+- **IAM role**: **AWS Config service-linked role** (`AWSServiceRoleForConfig`)
+  - Service-linked roles are predefined by AWS and include the permissions AWS Config requires.  [oai_citation:5‡AWS Documentation](https://docs.aws.amazon.com/config/latest/developerguide/using-service-linked-roles.html?utm_source=chatgpt.com)
+- **Recording scope**: records the resource types required for enabled Security Hub controls in this Region (including IAM global resource types such as users/roles/policies/groups).  [oai_citation:6‡AWS Documentation](https://docs.aws.amazon.com/securityhub/latest/userguide/config-controls.html?utm_source=chatgpt.com)
+- **Delivery**: S3 bucket configured for AWS Config delivery (already present in this lab)
+
+#### Verification
+
+- In the **Config.1 control view**, the **Checks** row shows:
+  - Compliance: **PASSED**
+  - Workflow: **RESOLVED** (set automatically by Security Hub when compliance becomes PASSED)  [oai_citation:7‡AWS Documentation](https://docs.aws.amazon.com/securityhub/latest/userguide/controls-overall-status.html?utm_source=chatgpt.com)
+
+---
+
+### How I expect to respond when this fails (or regresses)
+
+If Config.1 goes back to FAILED:
+
+1. Open the Config.1 control and inspect the latest finding JSON (reason codes and “missing required resource types” are usually explicit).
+2. In AWS Config, verify:
+   - recorder is on in the Region,
+   - service-linked role is in use,
+   - required resource types are being recorded (especially IAM global types if relevant controls are enabled).
+3. Re-check Security Hub after the next update window (control findings refresh on a schedule).  [oai_citation:8‡AWS Documentation](https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html?utm_source=chatgpt.com)
+
+---
+
+### How this maps to frameworks and interview narrative
+
+- CIS AWS Foundations Benchmark v5.0.0
+  - Directly addresses **Config.1** expectations for posture evidence and configuration recording.
+- AWS Security Hub CSPM
+  - Demonstrates using posture tooling to identify a high-severity gap, remediate it, and verify via the control finding state.  [oai_citation:9‡AWS Documentation](https://docs.aws.amazon.com/securityhub/latest/userguide/config-controls.html?utm_source=chatgpt.com)
+- “Architect story” (risk narrative)
+  - “I fixed a foundational control that posture management depends on: reliable configuration recording with the correct role and required resource scope.”
+
+---
+
+### Evidence captured
+
+- Screenshot: Security Hub CSPM → Config.1 **Checks row showing PASSED / RESOLVED**
+- Screenshot: AWS Config recorder settings showing:
+  - Recording is on
+  - Service-linked role (`AWSServiceRoleForConfig`) selected
+  - Recording scope includes required resource types
+
+---
+
+### Future improvements
+
+- Enable/validate AWS Config recording across additional Regions (CIS recommends “all Regions”).
+- Express AWS Config recorder setup as IaC (Terraform/CloudFormation) so the control is repeatable and reviewable as code.
+- Add a small “posture runbook” checklist: when a CSPM control fails, capture the reason code, remediate, and keep screenshots + a short narrative for evidence.
+
 ## 2025-12-10 – Unauthorized API calls detection (CIS CloudWatch.2)
 
 ### What I set up (in plain language)
