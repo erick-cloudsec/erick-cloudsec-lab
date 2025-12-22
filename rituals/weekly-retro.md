@@ -1,4 +1,31 @@
-Here’s a public-safe Week 4 retro you can drop straight into your retro file (newest at the top):
+# Week 5 Retro (Dec 15–22, 2025)
+
+## 1) What did I ship this week?
+- **AWS:** Remediated **CIS Config.1** in Security Hub CSPM by confirming AWS Config is recording properly (service-linked role + required recording coverage). I also **captured and organized evidence** (Security Hub check showing PASSED/RESOLVED + AWS Config settings screenshots).
+- **OWASP Nest:** Tightened `docs/api/projects.md` for `GET /api/v0/projects/` (validated via Postman + local OpenAPI), then successfully pushed my branch (`docs/api-projects`) to my fork and prepared for a PR.
+
+## 2) What moved me closer to Cloud/AppSec Architect interviews?
+- I did a real **posture → remediation → verification** loop using CSPM findings (this feels like “real security work,” not theory).
+- I unblocked the **open-source contribution pipeline** (fork/branch/push), which will let me ship portfolio artifacts more reliably.
+
+## 3) What felt heavy or draining?
+- Distinguishing **Security Hub** vs **Security Hub CSPM** and learning what the UI/status fields actually mean.
+- Git/GitHub friction (403s, auth, and then realizing the project expects work tied to an issue even for docs).
+
+## 4) What will I do less of next week?
+- Less “trial-and-error clicking.” More “read CONTRIBUTING.md / project workflow first.”
+- Less over-indexing on summary banners in CSPM; more trusting the underlying checks/findings and the evaluation cadence.
+
+## 5) One win to celebrate.
+- I fixed a **critical** CIS control and produced evidence like an auditor/architect would.
+- I also broke through the GitHub contribution barrier (pushed my branch successfully).
+
+## 6) Top 1–2 priorities for next week.
+- **OWASP:** Get/align to an issue assignment, then open/finish the PR the way maintainers prefer (issue-linked).
+- **AWS:** Pick one more small, evidence-friendly CIS control only if holiday energy allows; otherwise, keep the win and don’t force scope creep.
+
+### Smallest next action
+Check whether the OWASP issue is assigned yet; if yes, link it in the PR description and submit.
 
 # Week 4 Retro (Dec 8–14, 2025)
 
