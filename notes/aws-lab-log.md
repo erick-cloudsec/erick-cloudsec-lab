@@ -1,5 +1,108 @@
 # AWS Lab Log
 
+## 2025-12-26 – Root hardware MFA hardening (CIS IAM.6)
+
+### What I set up (in plain language)
+
+In my erick-cloudsec lab AWS account, I remediated a Critical failing CIS/Security Hub posture control: IAM.6 – Hardware MFA should be enabled for the root user.
+
+This control isn’t just “root has MFA.” It specifically checks that the account is enabled to sign in with **root credentials using hardware-backed MFA**, and it fails if **virtual MFA devices are permitted** for root sign-in.
+
+I started from Security Hub CSPM → CIS AWS Foundations Benchmark (v5.x) and used the failing control as my “work item.” I already had MFA on root, but the control was failing because a **virtual MFA device** was still permitted.
+
+After switching root MFA to hardware-backed methods only (passkeys) and removing the virtual MFA device, the IAM.6 check now shows PASSED (and the finding workflow status is RESOLVED, which Security Hub applies automatically when a control finding becomes PASSED).
+
+Note: the top-level “Control status” banner can lag the latest finding update because Security Hub rolls up control status based on findings from the previous 24 hours; the Checks row is the best proof of the most recent evaluation.
+
+———
+
+### Asset I’m protecting
+
+- AWS account “break-glass” access (root credentials):
+  - Preventing unauthorized takeover of the most privileged identity
+  - Ensuring root access requires hardware-backed MFA
+  - Avoiding a single-point-of-failure by keeping multiple MFA devices registered
+
+———
+
+### Threat I care about here
+
+- Account takeover: if root credentials are compromised (password theft, phishing, credential stuffing), an attacker can gain unrestricted control of the account.
+- Persistence and cleanup risk: an attacker with root can create backdoor identities, weaken security controls, and make incident response harder.
+- Operational risk: losing access to the only MFA device can cause access interruption during a true emergency (“break-glass” moment).
+
+———
+
+### Detection / control details (the actual config)
+
+#### Detection source (posture finding)
+
+- Service: AWS Security Hub CSPM
+- Standard: CIS AWS Foundations Benchmark (v5.x)
+- Control: IAM.6
+- Region / account: us-east-1 / 912590423014
+
+Security Hub generates and updates control findings on a schedule and summarizes control status based on findings in the prior 24 hours.
+
+#### Remediation (Root MFA configuration)
+
+On the root user “My security credentials” page:
+
+- Confirmed hardware-backed MFA is registered for root:
+  - Passkeys / security keys (Touch ID / FIDO2)
+- Removed the virtual MFA device previously registered for root (authenticator/TOTP), because IAM.6 fails if virtual MFA is permitted.
+- Kept two hardware-backed methods registered (resilience), since AWS supports up to 8 MFA devices per root user.
+
+#### Verification
+
+- AWS Config:
+  - Managed rule: `root-account-hardware-mfa-enabled`
+  - Current evaluation: COMPLIANT
+- Security Hub CSPM:
+  - IAM.6 control Checks row shows PASSED and the finding workflow is RESOLVED
+
+———
+
+### How I expect to respond when this fails (or regresses)
+
+If IAM.6 goes back to FAILED:
+
+1. Confirm what MFA device types are registered under root “My security credentials.”
+2. Ensure only hardware-backed options are permitted for root sign-in (passkeys/security keys/hardware device) and that no virtual MFA devices are present for root.
+3. Re-check AWS Config rule `root-account-hardware-mfa-enabled` evaluation, then refresh Security Hub after the next update window.
+
+———
+
+### How this maps to frameworks and interview narrative
+
+- CIS AWS Foundations Benchmark (v5.x)
+  - Directly addresses IAM.6 expectations for hardening root access with hardware-backed MFA.
+- AWS Security Hub CSPM
+  - Demonstrates a posture-driven workflow: identify a critical gap → remediate in IAM → verify via AWS Config + Security Hub finding state.
+- “Architect story” (risk narrative)
+  - “I treated root as break-glass and enforced phishing-resistant MFA. I used CSPM to find the gap, removed virtual MFA permission for root, and verified compliance through Config and Security Hub.”
+
+———
+
+### Evidence captured
+
+- Screenshot: Root “My security credentials” → MFA devices list showing only “Passkeys and security keys”
+- Screenshot: AWS Config rule `root-account-hardware-mfa-enabled` showing COMPLIANT
+- Screenshot: Security Hub CSPM → IAM.6 Checks row showing PASSED / RESOLVED
+
+———
+
+### References (for my notes)
+
+- CIS benchmark in Security Hub (control list): https://docs.aws.amazon.com/securityhub/latest/userguide/cis-aws-foundations-benchmark.html
+- IAM controls / IAM.6 definition: https://docs.aws.amazon.com/securityhub/latest/userguide/iam-controls.html
+- AWS Config rule: root-account-hardware-mfa-enabled: https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html
+- Enable passkey/security key for root: https://docs.aws.amazon.com/IAM/latest/UserGuide/enable-fido-mfa-for-root.html
+- Control status roll-up behavior: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-overall-status.html
+- Control details (Checks row / past 24 hours): https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-control-details.html
+
+Sources: Security Hub CIS benchmark control list and IAM controls (IAM.6), AWS Config managed rule behavior, root passkey/security key setup steps, and Security Hub control-status update cadence.  ￼
+
 ## 2025-12-21 – AWS Config recording foundation (CIS Config.1)
 
 ### What I set up (in plain language)
