@@ -1,3 +1,32 @@
+# Week 6 Retro (Dec 22–28, 2025)
+
+1. What did I ship this week?
+- AWS: Remediated CIS IAM.6 (root account protected with hardware MFA/passkeys) and verified compliance in AWS Config + Security Hub CSPM (us-east-1).
+- OWASP Nest: Completed full local environment setup (including data sync + indexing).
+- OWASP Nest: Opened umbrella issue for ongoing API docs work and submitted Projects endpoint documentation PR.
+  - Issue: https://github.com/OWASP/Nest/issues/3062
+  - PR: https://github.com/OWASP/Nest/pull/3067
+
+2. What moved me closer to Cloud/AppSec Architect interviews?
+- Built a clean identity-control story around root account “break-glass” access and MFA hardening, including verification evidence in posture tooling.
+- Demonstrated real OSS contribution workflow: issue-first process, PR linking requirements, docs that reflect observed runtime behavior (not just schema examples).
+- Strengthened troubleshooting reps in a containerized dev environment (DNS resolution, env var propagation into containers, compose file path awareness).
+
+3. What felt heavy or draining?
+- OWASP local setup required backtracking (missed contribution steps initially), plus debugging network/DNS and environment variable configuration.
+- PR workflow nuance: auto-close behavior until the PR used a valid closing issue reference.
+
+4. What will I do less of next week?
+- Less “assume it will work” — follow CONTRIBUTING/setup steps line-by-line before starting dev tasks.
+- Less trying to force everything into one umbrella issue/PR flow; use smaller work-item issues when needed to match project workflows.
+
+5. One win to celebrate.
+- Got a PR successfully submitted and compliant with OWASP Nest’s automated workflow checks — a real milestone in contributing to the project.
+
+6. Top 1–2 priorities for next week.
+- Continue OWASP Nest API docs with the next endpoint (small, issue-assigned, docs-only PR).
+- Add one lightweight detection rep: metric filter + short runbook card tied to auth failures (pattern-based, interview-ready).
+
 # Week 5 Retro (Dec 15–22, 2025)
 
 ## 1) What did I ship this week?
