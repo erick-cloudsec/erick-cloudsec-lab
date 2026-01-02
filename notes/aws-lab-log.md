@@ -1,5 +1,74 @@
 # AWS Lab Log
 
+## 2026-01-02 – Unauthorized API calls alarm (CIS CloudWatch.2)
+
+### What I set up (in plain language)
+I set up monitoring so that when AWS records a **permission-denied API call** in CloudTrail, CloudWatch will **count it**, **raise an alarm**, and **notify me** (via SNS). This aligns with CIS CloudWatch.2 (“Ensure a log metric filter and alarm exist for unauthorized API calls”).
+
+### Why I set it up
+Unauthorized API calls can indicate:
+- a harmless misconfiguration (least privilege too tight), or
+- early signs of malicious probing / credential misuse.
+
+### What I configured (specifics)
+**Log source**
+- CloudTrail management events routed to CloudWatch Logs log group: `aws-cloudtrail-logs-erick-cloudsec-lab` (us-east-1)
+
+**Metric filter → custom metric**
+- Namespace: `CISBenchmark`
+- Metric name: `UnauthorizedAPICalls`
+- Metric value: `1`
+- Filter pattern:
+  { ( $.errorCode = "*UnauthorizedOperation*" || $.errorCode = "AccessDenied*" )
+    && ( $.userIdentity.sessionContext.sessionIssuer.userName != "AWSServiceRoleForConfig" )
+    && ( $.userIdentity.sessionContext.sessionIssuer.userName != "AWSServiceRoleForResourceExplorer" ) }
+
+Notes:
+- Used wildcards to catch variants like `Client.UnauthorizedOperation` as well as `AccessDenied*`.
+- Excluded common “expected noise” service roles for Config and Resource Explorer.
+
+**Alarm**
+- Name: `Alarm-Unauthorized-API-Calls`
+- Condition: `UnauthorizedAPICalls >= 1` for 1 datapoint within 5 minutes
+- Action: SNS topic `lab-security-alerts`
+- Expected behavior: alarms can show `INSUFFICIENT_DATA` until the first matching datapoints exist.
+
+### How I verified it works (safe test)
+1) Assumed a role with **no identity-based permissions**: `ErickDenyTestRole`
+2) Triggered a harmless, read-only denied call: `ec2:DescribeInstances` via AWS CLI in CloudShell
+3) Observed:
+   - CloudTrail event generated with an unauthorized error
+   - Metric filter matched and emitted a datapoint
+   - Alarm transitioned from `INSUFFICIENT_DATA` → `ALARM`
+   - SNS action executed successfully
+
+### Golden CloudTrail event (proof details)
+- Time (UTC): `2026-01-02T03:51:58Z`
+- Actor: `AssumedRole` — `arn:aws:sts::912590423014:assumed-role/ErickDenyTestRole/denytest`
+- Issuer role: `arn:aws:iam::912590423014:role/ErickDenyTestRole` (MFA: true)
+- API: `ec2.amazonaws.com : DescribeInstances` (readOnly: true)
+- Result: `errorCode = Client.UnauthorizedOperation`
+- Source: `3.89.163.64` | AWS CLI via CloudShell (userAgent shows `exec-env/CloudShell`)
+- Correlation: `eventID=f7a276de-9ab0-4463-baf8-171c3f2b014f`, `requestID=1efeb0a5-1baf-4270-b6e9-9a09354b1a50`
+
+### Evidence (screenshots)
+Stored in: `Week7/`
+- Metric filter configuration (pattern + metric namespace/name/value)
+- Alarm configuration + graph (showing ALARM) + Alarm History (showing `INSUFFICIENT_DATA → ALARM` and SNS action success)
+- CloudTrail event details (expanded view showing `userIdentity`, `eventName`, `errorCode`, `sourceIPAddress`)
+
+### Tiny runbook (3 steps)
+1) **Identify** actor + scope: `userIdentity.*`, `eventSource`, `eventName`, `sourceIPAddress`, time window.
+2) **Validate**: misconfig vs suspicious probing (repeat denied calls, unusual API mix, new source IP/user agent).
+3) **Contain + fix**: if suspicious, cut off the credential path (restrict role assumption/credentials), tighten IAM policy, document root cause + prevention.
+
+### Interview bullets (identity → risk → control → verification → evidence)
+- **Identity:** Used CloudTrail identity context to attribute denied API activity to a specific assumed-role session.
+- **Risk:** Unauthorized API calls can signal mis-scoped permissions or credential misuse; monitoring reduces time-to-detect.
+- **Control:** Implemented CIS CloudWatch.2 using CloudTrail → CloudWatch Logs → metric filter → alarm → SNS.
+- **Verification:** Safely triggered a denied call via a no-permissions role and confirmed datapoint emission + alarm/SNS execution.
+- **Evidence:** Screenshots of the filter, alarm history/state, and the CloudTrail event showing `Client.UnauthorizedOperation`.
+
 ## 2025-12-26 – Root hardware MFA hardening (CIS IAM.6)
 
 ### What I set up (in plain language)
