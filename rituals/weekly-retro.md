@@ -1,3 +1,35 @@
+# Week 7 Retro (Dec 29–Jan 4, 2026)
+
+## 1) What did I ship this week?
+- AWS: Implemented and validated CIS CloudWatch.2-style detection for **Unauthorized API Calls** using **CloudTrail → CloudWatch Logs metric filter → CloudWatch Alarm → SNS notification**.
+- AWS: Tuned the metric filter to catch real-world `errorCode` variants (e.g., `Client.UnauthorizedOperation`) using wildcards (`*UnauthorizedOperation*`, `AccessDenied*`) and reduced known home-lab noise by excluding specific service roles.
+- AWS: Created a controlled test path (assume-role session) to safely generate denied calls and confirm the alarm went to **ALARM** and executed actions.
+
+## 2) What moved me closer to Cloud/AppSec Architect interviews?
+- Built an end-to-end **Identity → Detection → Response** story I can explain:
+  - Identity: STS assumed-role session executing the call
+  - Detection: CloudTrail event matched by metric filter + alarm threshold hit
+  - Response: SNS notification fired; triage checklist based on CloudTrail fields
+- Improved my ability to read a CloudTrail event and quickly extract the basics: actor, action, origin, error family, and timing.
+
+## 3) What felt heavy or draining?
+- Console navigation friction (remembering where specific screens/metrics live).
+- Debugging small-but-critical mismatches between expected vs actual CloudTrail fields/values (e.g., `errorCode` variants).
+- The “last mile” work of locating the right event details and proving the alarm actually emitted and fired.
+
+## 4) What will I do less of next week?
+- Less unstructured clicking/searching. More: start each session with a short checklist of (a) what I’m building, (b) where I’ll verify it, (c) what evidence I’m capturing.
+- Less stopping after “configuration complete.” More: always trigger a safe test and capture proof in the same session.
+
+## 5) One win to celebrate.
+- The unauthorized API calls alarm fired end-to-end and executed the SNS action successfully (real validation, not just setup).
+
+## 6) Top 1–2 priorities for next week.
+1) Shift my training approach:
+   - Use **AWS Skill Builder learning plans** as my core learning items
+   - Incorporate **CSA training modules** as a “spine” for the security concepts
+   - Replicate the Skill Builder work in my personal AWS lab (with evidence + interview bullets)
+
 # Week 6 Retro (Dec 22–28, 2025)
 
 1. What did I ship this week?
