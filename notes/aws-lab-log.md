@@ -1,5 +1,51 @@
 # AWS Lab Log
 
+## Week 8 — SimuLearn Foundations (Jan 12–Jan 18, 2026)
+
+### Completed
+- AWS SimuLearn: Cloud First Steps — Completed (see evidence)
+- AWS SimuLearn: Cloud Computing Essentials — Completed (see evidence)
+
+### What I did (high level)
+- Worked through two simulated customer scenarios and built the proposed solutions using structured, step-by-step lab guidance in the AWS Management Console (SimuLearn format).
+
+### Key services / concepts touched
+- Reliability & availability basics: redundancy across Availability Zones (AZs)
+- Compute: EC2 (virtual servers)
+- Storage / hosting: S3 static website hosting
+- Access control: S3 bucket policy for public read (`s3:GetObject`) + exposure implications
+
+### Evidence (files / links)
+- Cloud First Steps:
+  - evidence/aws-skillbuilder-solutions-architect/CloudFirstSteps/CloudFirstSteps-SimuLearn.png
+  - evidence/aws-skillbuilder-solutions-architect/CloudFirstSteps/CloudFirstSteps-Lab.png
+  - evidence/aws-skillbuilder-solutions-architect/CloudFirstSteps/cloud-first-steps-certificate.pdf
+- Cloud Computing Essentials:
+  - evidence/aws-skillbuilder-solutions-architect/CloudComputingEssentials/CloudComputingEssentials-Lab.png
+  - evidence/aws-skillbuilder-solutions-architect/CloudComputingEssentials/cloud-computing-essentials-certificate.pdf
+
+### What I learned (3–5 bullets)
+- Making an S3 static website publicly reachable requires enabling static website hosting and explicitly allowing public read for site objects (e.g., `s3:GetObject`) via a bucket policy.
+- Biggest risk with S3 static hosting is accidental over-exposure (policy scope too broad / wrong prefix / sensitive objects in the same bucket).
+- Multi-AZ deployment is a foundational availability pattern; it reduces downtime risk from a single-AZ failure/outage.
+- Shared Responsibility is the anchor: AWS secures the underlying cloud infrastructure; I’m responsible for service configuration and access controls (like bucket policies).
+
+### Interview-ready bullets (Week 8 retention)
+- Identity: S3 bucket policy (public read)
+  Risk: unintended public exposure of objects/data
+  Control: least-privilege bucket policy (only `s3:GetObject`, scoped to intended content); keep sensitive objects separate
+  Verify: test anonymous access only for intended paths; review bucket policy / public exposure settings
+  Evidence: screenshots + certificate (see Evidence section)
+
+- Identity: EC2 workload placement across AZs
+  Risk: single-AZ outage causes downtime
+  Control: deploy redundant compute across multiple AZs
+  Verify: validate service remains reachable during failure scenario
+  Evidence: screenshots + certificate (see Evidence section)
+
+### Next up (per learning plan order)
+- AWS SimuLearn: Networking Concepts
+
 ## 2026-01-02 – Unauthorized API calls alarm (CIS CloudWatch.2)
 
 ### What I set up (in plain language)
