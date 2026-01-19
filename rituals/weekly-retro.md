@@ -1,3 +1,35 @@
+# Week 8 Retro (Jan 12–Jan 18, 2026)
+
+## 1) What did I ship this week?
+- **AWS:** Completed **AWS SimuLearn: Cloud First Steps** (with lab + certificate evidence captured).
+- **AWS:** Completed **AWS SimuLearn: Cloud Computing Essentials** (S3 static website hosting + bucket policy work, with lab + certificate evidence captured).
+- **CSA (CCSK v5):** Started **Domain 1: Cloud Computing Concepts & Architectures** and completed:
+  - Domain 1 Introduction
+  - Unit 1: Introduction to Cloud Computing
+- **Retention:** Did a short **Q&A-based retention** run focused on what I actually did (S3 static site exposure, least-privilege instincts, multi-AZ reliability, shared responsibility).
+- **OWASP:** Opened **PR #3397** to improve Swagger/OpenAPI docs for OWASP Nest Projects API; now working through maintainer review feedback to tighten the diff and align with repo conventions.
+
+## 2) What moved me closer to Cloud/AppSec Architect interviews?
+- Built a credible **public exposure control** story using S3 static website hosting: what makes it public, the main risk (over-exposure), and how to scope it down.
+- Reinforced core cloud security/architecture language (**shared responsibility, Region vs AZ, resilience patterns**) and connected it to hands-on work.
+- Demonstrated a foundational reliability pattern (**multi-AZ compute**) and can explain the failure mode it mitigates (single-AZ outage).
+- Shipped and iterated in a real security-adjacent OSS workflow (**OWASP PR + review cycle**), which strengthens “operate in engineer-heavy/security-driven environments” signal.
+
+## 3) What felt heavy or draining?
+- Getting back into **OWASP** after stepping away for a couple of weeks — reloading repo conventions and mental context took energy.
+- Adjusting my detailed learning plan to align with the **AWS Skill Builder Solutions Architect learning path + CCSK** sequence — felt like adapting a curriculum on the fly.
+
+## 4) What will I do less of next week?
+- Less time “re-planning the plan.” More: execute the next item in the AWS plan + next CCSK unit in order, with minimal adjustments.
+- Less taking long breaks between training sessions to reduce context reload costs.
+
+## 5) One win to celebrate.
+- **I started the official AWS Solutions Architect learning plan.** It feels more structured and reduces planning friction.
+
+## 6) Top 1–2 priorities for next week.
+1) **AWS:** AWS SimuLearn **#3 Networking Concepts** (complete + capture evidence).
+2) **CCSK:** **Domain 1 Unit 2 + Unit 3** (in order), steady drip cadence.
+
 # Week 7 Retro (Dec 29–Jan 4, 2026)
 
 ## 1) What did I ship this week?
