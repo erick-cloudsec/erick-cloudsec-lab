@@ -1,3 +1,36 @@
+# Week 9 Retro (Jan 19–Jan 25, 2026)
+
+## 1) What did I ship this week?
+- **AWS:** Completed **AWS SimuLearn: Networking Concepts** (evidence captured: certificate + screenshots).
+- **AWS:** Completed **AWS SimuLearn: Connecting VPCs** (focus: **VPC Peering**; evidence captured: certificate + screenshot). *(Note: certificate date may reflect UTC timestamp vs America/Chicago.)*
+- **CSA (CCSK v5):** Completed the remaining sections for **Domain 1: Cloud Computing Concepts & Architectures**, including:
+  - Unit 2: Cloud Computing Models
+  - Unit 3: Reference & Architecture Models
+  - Unit 4: Cloud Security Scope, Responsibilities, & Models
+  - Domain 1 Conclusion
+- **Retention:** Completed a short **Q&A-based retention** run focused on networking fundamentals, VPC connectivity, and troubleshooting order (routes → security groups).
+
+## 2) What moved me closer to Cloud/AppSec Architect interviews?
+- Built a credible **networking + segmentation** story: why VPC connectivity exists, the blast-radius risk it introduces, and how to reason about least-privilege at the network layer.
+- Strengthened practical troubleshooting instincts that map to real architecture work: **validate routing/return paths first, then security group enforcement at the ENI/resource level**.
+- Added hands-on “architecture literacy” around **VPC Peering** and its operational requirements (explicit routes + correctly scoped SG rules).
+- Closed out CCSK **Domain 1 foundations**, giving me cleaner vocabulary and models to explain cloud security responsibilities and control surfaces.
+
+## 3) What felt heavy or draining?
+- For the first time, for **VPC Connectivity / Peering**, the AWS Skill Builder **simulated solution conversation with AI** seemed problematic. Even though I had the correct solution information, the AI seemed to be looking for some detail or information that I just couldn't figure out.
+- I eventually had to leave the AI conversation mode for that course and go to the **scripted conversation**. Even from that I can't tell what the AI was looking for, because it appeared I had hit all the key points.
+- The **lab and DIY section** proceeded without hitch.
+
+## 4) What will I do less of next week?
+- Less time second-guessing the AI conversation loop in Skill Builder. If I’m getting stuck, I’ll **switch to the scripted conversation earlier** so I can keep momentum and finish the learning loop.
+
+## 5) One win to celebrate.
+- **I completed two AWS networking SimuLearn courses and finished CCSK Domain 1.** That’s a meaningful foundation milestone for cloud security architecture conversations.
+
+## 6) Top 1–2 priorities for next week.
+1) **AWS:** Complete the **next uncompleted course** in the AWS Solutions Architect learning plan (in sequence) + capture evidence cleanly.
+2) **CCSK:** Start **Domain 2** (next unit(s) in order), steady drip cadence + log entry.
+
 # Week 8 Retro (Jan 12–Jan 18, 2026)
 
 ## 1) What did I ship this week?
