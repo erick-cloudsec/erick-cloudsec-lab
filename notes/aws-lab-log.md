@@ -1,3 +1,26 @@
+## Week 9 — 2026-01-19 to 2026-01-25
+
+### AWS Skill Builder (Solutions Architect Learning Plan)
+
+**Course(s) completed**
+- **AWS SimuLearn: Networking Concepts** — Completed **2026-01-24**
+- **AWS SimuLearn: Connecting VPCs** — Focus: **VPC Peering** (certificate shows **2026-01-26**; timestamp likely UTC vs America/Chicago)
+
+**Evidence**
+- `evidence/aws-skillbuilder-solutions-architect/ConnectingVPCs/ConnectingVPCs.png`
+- `evidence/aws-skillbuilder-solutions-architect/ConnectingVPCs/ConnectingVPCsCertificate.pdf`
+- `evidence/aws-skillbuilder-solutions-architect/NetworkConcepts/NetworkingConceptsLab.png`
+- `evidence/aws-skillbuilder-solutions-architect/NetworkConcepts/NetworkingConcepts.png`
+- `evidence/aws-skillbuilder-solutions-architect/NetworkConcepts/NetworkingConceptsCertificate.pdf`
+
+**Built / configured / observed (high-signal notes)**
+- Reinforced core VPC building blocks and how traffic flows: subnet scope, route tables determine next hop, security groups filter traffic at the ENI/resource level.
+- Practiced first-pass “networking issue” troubleshooting using a clean order: **route tables (both directions/return path)** → **security groups**.
+- Connected VPCs using **VPC Peering** and reinforced the key operational requirements:
+  - Peering establishes connectivity, but routing still depends on **explicit route table updates** on both sides.
+  - Access still depends on **security group rules** being correctly scoped for required ports/sources.
+- Key risk lens: connecting networks enables needed access between workloads, but increases attack surface/blast radius unless scoped and segmented for least privilege.
+
 # AWS Lab Log
 
 ## Week 8 — SimuLearn Foundations (Jan 12–Jan 18, 2026)
