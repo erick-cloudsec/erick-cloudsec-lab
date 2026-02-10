@@ -23,6 +23,25 @@
 
 # AWS Lab Log
 
+## Week 10 — 2026-02-02 to 2026-02-08
+
+### AWS Skill Builder (Solutions Architect Learning Plan)
+
+**Course(s) completed**
+- **AWS SimuLearn: DNS** — Completed **2026-02-07**
+
+**Evidence**
+- `evidence/aws-skillbuilder-solutions-architect/DNS/DNSLab.png`
+- `evidence/aws-skillbuilder-solutions-architect/DNS/DNSCertificate.pdf`
+
+**Built / configured / observed (high-signal notes)**
+- Configured **Amazon Route 53 Private Hosted Zone** associated to a **VPC** to provide internal-only DNS resolution for a private domain namespace.
+- Created an **A record** mapping an internal hostname to a **private IP** (service discovery without hardcoding IPs in apps).
+- Created a **CNAME record** aliasing one internal name to another to simplify naming and reduce coupling between callers and target endpoints.
+- Verified end-to-end behavior: client/bastion resolved the internal name via the VPC resolver and the request reached the intended internal service (DNS → resolved private IP → app/HTTP request).
+- **Risk lens:** internal DNS mistakes can cause “wrong destination” failures (pointing to the wrong private IP/host), and overlapping/private-zone naming can create confusing resolution behavior if namespaces aren’t controlled.
+- **Architect takeaway:** Private DNS is part of your **network boundary story**—it enables clean internal service discovery while keeping name resolution scoped to the VPC(s) that should see it.
+
 ## Week 8 — SimuLearn Foundations (Jan 12–Jan 18, 2026)
 
 ### Completed

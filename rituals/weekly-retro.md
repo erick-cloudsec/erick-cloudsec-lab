@@ -1,3 +1,37 @@
+# Week 10 Retro (Feb 2–Feb 8, 2026)
+
+## 1) What did I ship this week?
+- **AWS:** Completed **AWS SimuLearn: DNS** (evidence captured: certificate + lab screenshot(s)).
+- **CSA (CCSK v5):** Completed **Domain 2**:
+  - Unit 1: Cloud Governance
+  - Unit 2: Effective Cloud Governance
+- **OWASP:** Continued progress on **OWASP/Nest PR #3397**:
+  - Removed accidentally-added markdown docs folder (cleaned diff).
+  - Fixed OpenAPI examples for Pydantic v2 in Projects schema (migrated `example=` → `examples=[...]`).
+  - Stabilized frontend unit tests (timeouts / waitFor tuning) to reduce local failures.
+  - **Current blocker:** `make check-test` still failing due to flaky/failing Playwright E2E (Mobile Safari iPhone 13; About page + UserDetails “Test User”).
+
+## 2) What moved me closer to Cloud/AppSec Architect interviews?
+- **AWS DNS boundary story:** I can explain why **private DNS** exists, how it supports internal service discovery, and how it reinforces VPC boundary thinking.
+- **Governance story:** I strengthened the “how orgs keep cloud usage aligned + controlled over time” framing (ownership + guardrails + measurable controls).
+- **OSS signal:** I’m operating in a real repo with strict workflow (local test gate), reviewer feedback loops, and test stabilization work under constraints.
+
+## 3) What felt heavy or draining?
+- Trying to get the OWASP Nest **test suite** to pass after making changes - especially because failures were showing up in **areas unrelated to my PR**.
+- The most draining part was the **Playwright E2E** layer: intermittent/flaky failures (notably Mobile Safari / iPhone 13) that appear tied to **environment/fixtures/timing**, not my functional changes.
+- Net effect: extra time spent on **triage and isolation** (what’s my fault vs what’s upstream flake) rather than forward progress on the OpenAPI/Swagger improvements.
+
+## 4) What will I do less of next week?
+- Spend less time trying to get the **full OWASP Nest test suite** to pass when failures appear **unrelated to my PR changes**.
+- Instead, I’ll timebox triage and focus on **isolating the failing tests** (run the specific Playwright spec(s), use `--debug`, and rely on Playwright’s trace viewer for actionable evidence), then either fix determinism/fixtures or escalate with a clear, minimal reproduction.
+
+## 5) One win to celebrate.
+- I got back into the training rhythm and shipped concrete progress: **AWS SimuLearn: DNS** plus **CCSK Domain 2 Units 1–2** — which strengthens both my hands-on cloud fundamentals and my cloud governance narrative.
+
+## 6) Top 1–2 priorities for next week.
+1) **AWS spine:** Complete the **next** course in the AWS Skill Builder **Solutions Architect Learning Plan** (in order) with clean evidence capture + a short lab log entry.
+2) **CCSK:** Continue **Domain 2 (Cloud Governance)** in sequence, steady-drip cadence + log update in `notes/ccsk-log.md`.
+
 # Week 9 Retro (Jan 19–Jan 25, 2026)
 
 ## 1) What did I ship this week?
