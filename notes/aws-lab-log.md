@@ -1,3 +1,41 @@
+# AWS Lab Log
+
+## Week 11 — 2026-02-23 to 2026-03-01
+
+### AWS Skill Builder (Solutions Architect Learning Plan)
+
+**Course(s) completed**
+- **AWS SimuLearn: Content Delivery Networks** — Completed **2026-03-01**
+
+**Evidence**
+- `evidence/aws-skillbuilder-solutions-architect/CDN/ContentDeliveryNetworks.png`
+- `evidence/aws-skillbuilder-solutions-architect/CDN/ContentDeliveryNetworksCertifcate.pdf`
+
+**Built / configured / observed (high-signal notes)**
+- Deployed **Amazon CloudFront** to cache and deliver content from **edge locations / POPs**, routing users to the lowest-latency edge to reduce latency and origin load.
+- Configured CloudFront origins for a distribution, including **Amazon S3** (static content) and **EC2** (compute-backed origin patterns).
+- Reinforced the trust-boundary path: **Internet → CloudFront edge → origin (S3/EC2)**, with caching reducing direct origin exposure.
+- **Risk lens:** If the origin is too permissive (e.g., public S3 bucket access or weak origin restrictions), CloudFront can unintentionally serve sensitive data; mitigate with tight origin access controls, least privilege, and monitoring.
+
+## Week 10 — 2026-02-02 to 2026-02-08
+
+### AWS Skill Builder (Solutions Architect Learning Plan)
+
+**Course(s) completed**
+- **AWS SimuLearn: DNS** — Completed **2026-02-07**
+
+**Evidence**
+- `evidence/aws-skillbuilder-solutions-architect/DNS/DNSLab.png`
+- `evidence/aws-skillbuilder-solutions-architect/DNS/DNSCertificate.pdf`
+
+**Built / configured / observed (high-signal notes)**
+- Configured **Amazon Route 53 Private Hosted Zone** associated to a **VPC** to provide internal-only DNS resolution for a private domain namespace.
+- Created an **A record** mapping an internal hostname to a **private IP** (service discovery without hardcoding IPs in apps).
+- Created a **CNAME record** aliasing one internal name to another to simplify naming and reduce coupling between callers and target endpoints.
+- Verified end-to-end behavior: client/bastion resolved the internal name via the VPC resolver and the request reached the intended internal service (DNS → resolved private IP → app/HTTP request).
+- **Risk lens:** internal DNS mistakes can cause “wrong destination” failures (pointing to the wrong private IP/host), and overlapping/private-zone naming can create confusing resolution behavior if namespaces aren’t controlled.
+- **Architect takeaway:** Private DNS is part of your **network boundary story**—it enables clean internal service discovery while keeping name resolution scoped to the VPC(s) that should see it.
+
 ## Week 9 — 2026-01-19 to 2026-01-25
 
 ### AWS Skill Builder (Solutions Architect Learning Plan)
@@ -20,27 +58,6 @@
   - Peering establishes connectivity, but routing still depends on **explicit route table updates** on both sides.
   - Access still depends on **security group rules** being correctly scoped for required ports/sources.
 - Key risk lens: connecting networks enables needed access between workloads, but increases attack surface/blast radius unless scoped and segmented for least privilege.
-
-# AWS Lab Log
-
-## Week 10 — 2026-02-02 to 2026-02-08
-
-### AWS Skill Builder (Solutions Architect Learning Plan)
-
-**Course(s) completed**
-- **AWS SimuLearn: DNS** — Completed **2026-02-07**
-
-**Evidence**
-- `evidence/aws-skillbuilder-solutions-architect/DNS/DNSLab.png`
-- `evidence/aws-skillbuilder-solutions-architect/DNS/DNSCertificate.pdf`
-
-**Built / configured / observed (high-signal notes)**
-- Configured **Amazon Route 53 Private Hosted Zone** associated to a **VPC** to provide internal-only DNS resolution for a private domain namespace.
-- Created an **A record** mapping an internal hostname to a **private IP** (service discovery without hardcoding IPs in apps).
-- Created a **CNAME record** aliasing one internal name to another to simplify naming and reduce coupling between callers and target endpoints.
-- Verified end-to-end behavior: client/bastion resolved the internal name via the VPC resolver and the request reached the intended internal service (DNS → resolved private IP → app/HTTP request).
-- **Risk lens:** internal DNS mistakes can cause “wrong destination” failures (pointing to the wrong private IP/host), and overlapping/private-zone naming can create confusing resolution behavior if namespaces aren’t controlled.
-- **Architect takeaway:** Private DNS is part of your **network boundary story**—it enables clean internal service discovery while keeping name resolution scoped to the VPC(s) that should see it.
 
 ## Week 8 — SimuLearn Foundations (Jan 12–Jan 18, 2026)
 

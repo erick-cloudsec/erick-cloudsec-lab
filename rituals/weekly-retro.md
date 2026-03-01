@@ -1,3 +1,26 @@
+# Week 11 Retro (Feb 23–Mar 1, 2026)
+
+- **Did**
+  - Completed Week 11 pivot work (wrapped it up today after prioritizing onboarding).
+  - **AWS:** Completed **AWS SimuLearn: Content Delivery Networks (CloudFront)**.
+  - **CCSK:** Completed **CCSK Domain 2** (all remaining units).
+  - Made progress in **BeSA (Agentic AI on AWS)**, including labs.
+
+- **Felt**
+  - Stretched by onboarding/context switching, but relieved and proud I still finished the week.
+  - Reassured that “minimum viable but real” is sustainable during heavy weeks.
+
+- **Learned**
+  - **Pattern:** Momentum is a systems problem — keeping a tiny weekly baseline prevents restart friction and keeps confidence intact.
+
+- **Next week**
+  - Keep the baseline: 1 concrete completion (AWS spine or BeSA module) + capture evidence.
+  - Do one short retention pass (5–7 minutes) focused on trust boundaries + identity/blast radius.
+
+- **BeSA**
+  - Progressed in **Become a Solutions Architect (Agentic AI on AWS)** (completed sections + labs; earned Proficient badges).
+  - **Takeaway:** Agents expand the control surface (tools/actions/data paths), so the security mindset shifts to tighter permissions, clearer trust boundaries, and stronger monitoring of agent actions.
+
 # Week 10 Retro (Feb 2–Feb 8, 2026)
 
 ## 1) What did I ship this week?
