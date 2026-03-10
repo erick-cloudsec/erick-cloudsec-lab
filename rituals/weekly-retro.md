@@ -1,3 +1,17 @@
+# Week 12 Retro (Mar 2–Mar 8, 2026)
+
+- Did:
+  - Completed BeSA live session / proficiency: “Designing with Strands Agents”
+- Felt:
+  - Glad I kept momentum despite a heavy family/work week
+- Learned:
+  - Pattern: agentic systems still hinge on clear trust boundaries + permissions + observability (not “AI magic”)
+- Next week:
+  - Minimum viable: 1 AWS Skill Builder course + 60–90 min CCSK
+  - Optional: 1 small BeSA lesson if energy allows
+- BeSA:
+  - Completed “Designing with Strands Agents” — takeaway: treat agents like distributed actors; constrain permissions and measure behavior via logs/telemetry
+
 # Week 11 Retro (Feb 23–Mar 1, 2026)
 
 - **Did**
